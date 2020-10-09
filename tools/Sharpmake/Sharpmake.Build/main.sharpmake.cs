@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Sharpmake;
 using System.IO;
-using Sharpmake;
 
 [Generate]
 public class MainProject : Project
 {
     private string m_Root = @"[project.SharpmakeCsPath]\..\..\..";
-    private const string ProjectName = "main";
+    private const string mc_ProjectName = "#ProjectName";
 
     public MainProject()
     {
-        Name = ProjectName;
-        SourceRootPath = Path.Combine(m_Root, "source", ProjectName);
+        Name = mc_ProjectName;
+        SourceRootPath = Path.Combine(m_Root, "source", mc_ProjectName);
 
         AddTargets(new Target(
             Platform.win32 | Platform.win64,
@@ -23,7 +22,7 @@ public class MainProject : Project
     [Configure]
     public void ConfigureAll(Project.Configuration config, Target target)
     {
-        config.ProjectPath = Path.Combine(m_Root, @"projects", ProjectName);
+        config.ProjectPath = Path.Combine(m_Root, @"projects", mc_ProjectName);
         config.Options.Add(Options.Vc.Compiler.CppLanguageStandard.CPP17);
 
         // Additional includes
@@ -42,11 +41,12 @@ public class MainProject : Project
 [Generate]
 public class MainSolution : Solution
 {
+    private const string mc_SolutionName = "#SolutionName";
     private string m_Root = Path.Combine(@"[project.SharpmakeCsPath]", @"\..\..\..");
 
     public MainSolution()
     {
-        Name = "Main";
+        Name = mc_SolutionName;
         AddTargets(new Target(
             Platform.win32 | Platform.win64,
             DevEnv.vs2019,
