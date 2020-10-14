@@ -39,8 +39,9 @@ Rename-Item -Path ".\source\$pname\application\cpp.template" -NewName "applicati
 #=========================================================================================================================================
 
 #This will remove files like .git .gitignore and \templates directory
-Get-ChildItem -Path "." * -Include *.git, *.gitignore -Recurse | Remove-Item
-Remove-Item '.\Templates' -Recurse
+Get-ChildItem -Path "." * -Include *.gitignore -Recurse | Remove-Item
+Remove-Item '.\templates' -Recurse
+Remove-Item '.\git' -Recurse
 
 
 #=========================================================================================================================================
