@@ -1,6 +1,6 @@
 #ProjectName and SolutionName varibales
-$pName = Read-Host -Prompt 'Please enter Project Name'
 $sName = Read-Host -Prompt 'Please enter Solution Name'
+$pName = Read-Host -Prompt 'Please enter Project Name'
 
 if($pName -and $sName) {
     Write-Host "Project Name and Solution Name are successfuly added! :)"
@@ -30,10 +30,10 @@ Rename-Item -Path ".\source\$pname\application\cpp.template" -NewName "applicati
 
 #=========================================================================================================================================
 
-#This will change strings in tools\Sharpmake\Sharpmake.Build\main.sharpmake.cs
-(Get-Content ".\tools\Sharpmake\Sharpmake.Build\main.sharpmake.cs") | ForEach-Object{ $_ -replace "#SolutionName", "$sname" } | Set-Content ".\tools\Sharpmake\Sharpmake.Build\main.sharpmake.cs" -Force
+#This will change strings in tools\BuildScripts\main.sharpmake.cs
+(Get-Content ".\tools\BuildScripts\main.sharpmake.cs") | ForEach-Object{ $_ -replace "#SolutionName", "$sname" } | Set-Content ".\tools\BuildScripts\main.sharpmake.cs" -Force
 
-(Get-Content ".\tools\Sharpmake\Sharpmake.Build\main.sharpmake.cs") | ForEach-Object { $_ -replace "#ProjectName", "$pname" } | Set-Content ".\tools\Sharpmake\Sharpmake.Build\main.sharpmake.cs" -Force
+(Get-Content ".\tools\BuildScripts\main.sharpmake.cs") | ForEach-Object { $_ -replace "#ProjectName", "$pname" } | Set-Content ".\tools\BuildScripts\main.sharpmake.cs" -Force
 
 
 #=========================================================================================================================================
@@ -42,6 +42,9 @@ Rename-Item -Path ".\source\$pname\application\cpp.template" -NewName "applicati
 Get-ChildItem -Path "." * -Include *.gitignore -Recurse | Remove-Item
 Remove-Item '.\templates' -Recurse -Force
 Remove-Item '.git' -Recurse -Force
+
+Write-Host -NoNewLine 'Bootstrap script finished. Press any key to continue...';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
 
 
 #=========================================================================================================================================
