@@ -1,0 +1,5 @@
+  ########
+  # Data #
+  ########
+
+-* This is the working directory for the project. Place all resources and data here.
